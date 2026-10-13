@@ -223,3 +223,224 @@ body {
 }
 
 .btn-primary, .btn-secondary {
+  padding: 0.55rem 1.15rem;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--primary-accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-accent-hover);
+}
+
+.btn-secondary {
+  background: var(--tag-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Sections & Cards */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-size: 1.65rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.project-card, .timeline-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.project-header, .timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.proj-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+.proj-badge.primary { background: #e0e7ff; color: #3730a3; }
+.proj-badge.secondary { background: #dcfce7; color: #166534; }
+.proj-badge.tertiary { background: #fef3c7; color: #92400e; }
+
+[data-theme="dark"] .proj-badge.primary { background: #1e1b4b; color: #a5b4fc; }
+[data-theme="dark"] .proj-badge.secondary { background: #064e3b; color: #6ee7b7; }
+[data-theme="dark"] .proj-badge.tertiary { background: #451a03; color: #fde68a; }
+
+.date, .timeline-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.role, .timeline-subtitle {
+  color: var(--primary-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.p-pill {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.78rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.project-summary {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+ul {
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+}
+
+.project-actions {
+  margin-top: 1.2rem;
+}
+
+.btn-project-link {
+  display: inline-block;
+  color: var(--primary-accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+/* Tableau Embed Container */
+.tableau-embed-container {
+  width: 100%;
+  min-height: 850px;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  /* Containment prevents Tableau repaints from slowing down page scrolling */
+  contain: layout paint;
+}
+
+/* Skills */
+.skills-grid-portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.2rem;
+}
+
+.skill-group-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 1.2rem;
+  border-radius: 8px;
+}
+
+.skill-group-card h4 {
+  margin-bottom: 0.75rem;
+  color: var(--primary-accent);
+}
+
+/* Sticky Bottom Banner (Hardware-Accelerated) */
+.bottom-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background-color: var(--bottom-bar-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  transform: translateZ(0); /* Forces GPU layer */
+}
+
+.bottom-banner a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  gap: 2px;
+  transition: color 0.15s ease;
+}
+
+.bottom-banner a .icon {
+  font-size: 1.15rem;
+}
+
+.bottom-banner a:hover {
+  color: var(--primary-accent);
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1.5rem 3rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .contact-links, .hero-cta {
+    justify-content: center;
+  }
+  .nav-links {
+    display: none;
+  }
+}
