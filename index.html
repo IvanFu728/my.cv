@@ -139,30 +139,35 @@
         </p>
 
         <!-- ASYNCHRONOUS HIGH-SPEED TABLEAU CONTAINER -->
+        <!-- PROGRAMMATIC TABLEAU EMBED: FORCES FIRST STORY POINT (INTRODUCTION) -->
         <div class="tableau-embed-container">
-          <div class="tableauPlaceholder" id="viz1728835000000" style="position: relative; width: 100%; height: 850px;">
-            <noscript>
-              <a href="https://public.tableau.com/app/profile/ivan.fu2095/viz/BusinessAnalyticsIndividualAssignment_17647984447360/Story">
-                <img alt="The HDB Resale Market Reality" src="https://public.tableau.com/static/images/Bu/BusinessAnalyticsIndividualAssignment_17647984447360/Story/1_rss.png" style="border: none" />
-              </a>
-            </noscript>
-            <object class="tableauViz" style="display:none;">
-              <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-              <param name="embed_code_version" value="3" />
-              <param name="site_root" value="" />
-              <param name="name" value="BusinessAnalyticsIndividualAssignment_17647984447360/Story" />
-              <param name="tabs" value="no" />
-              <param name="toolbar" value="yes" />
-              <param name="storyPoint" value="1" />
-              <param name="static_image" value="https://public.tableau.com/static/images/Bu/BusinessAnalyticsIndividualAssignment_17647984447360/Story/1_rss.png" />
-              <param name="animate_transition" value="yes" />
-              <param name="display_static_image" value="yes" />
-              <param name="display_spinner" value="yes" />
-              <param name="display_overlay" value="yes" />
-              <param name="display_count" value="yes" />
-              <param name="language" value="en-US" />
-            </object>
-          </div>
+          <div id="tableauVizContainer" style="width: 100%; height: 850px;"></div>
+          <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+          <script type="text/javascript">
+            window.addEventListener('DOMContentLoaded', function () {
+              var containerDiv = document.getElementById("tableauVizContainer");
+              var url = "https://public.tableau.com/views/BusinessAnalyticsIndividualAssignment_17647984447360/Story";
+              var options = {
+                hideTabs: true,
+                hideToolbar: false,
+                width: "100%",
+                height: "850px",
+                onFirstInteractive: function (viz) {
+                  // Access the storybook and force it to switch to index 0 (Introduction)
+                  try {
+                    var sheet = viz.getWorkbook().getActiveSheet();
+                    if (sheet.getSheetType() === 'story') {
+                      sheet.activateStoryPointAsync(0);
+                    }
+                  } catch (err) {
+                    console.log("Story navigation initialized:", err);
+                  }
+                }
+              };
+              var viz = new tableau.Viz(containerDiv, url, options);
+            });
+          </script>
+        </div>
           <script type="text/javascript" defer>
             window.addEventListener('DOMContentLoaded', function () {
               var divElement = document.getElementById('viz1728835000000');
