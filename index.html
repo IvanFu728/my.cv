@@ -4,20 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fu Lap Hang, Ivan | Audit & Analytics Portfolio</title>
+  
+  <!-- Prevent Dark Mode Flash (FOUC) instantly before DOM render -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('site_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+  
   <link rel="stylesheet" href="style.css" />
+  <!-- Tableau API loaded with defer to keep initial scroll buttery smooth -->
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 </head>
-<body>
+<body id="home">
 
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-brand">Fu Lap Hang, Ivan</div>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="cv.pdf" class="btn-download" download>Download CV (PDF)</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#education" data-i18n="nav_education">Education</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <a href="#experience" data-i18n="nav_experience">Experience</a>
+      <a href="#skills" data-i18n="nav_skills">Skills</a>
+    </div>
+    
+    <div class="controls-group">
+      <!-- Dark/Light Mode Toggle -->
+      <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
+      </button>
+
+      <!-- Language Toggle (EN / 繁中) -->
+      <button class="control-btn" id="langToggle" aria-label="Toggle language">
+        🌐 <span id="langLabel">繁中</span>
+      </button>
+
+      <a href="cv.pdf" class="btn-download" download data-i18n="btn_cv">Download CV</a>
     </div>
   </nav>
 
@@ -28,13 +52,13 @@
         <img src="profile.jpg" alt="Fu Lap Hang, Ivan" class="hero-image" loading="eager" />
       </div>
       <div class="hero-text-wrapper">
-        <span class="badge">Audit & Data Analytics</span>
-        <h1>Fu Lap Hang, Ivan</h1>
-        <p class="tagline">Accounting & Finance Graduate &bull; University of Birmingham</p>
-        <p class="bio">
+        <span class="badge" data-i18n="hero_badge">Audit &amp; Data Analytics</span>
+        <h1 data-i18n="hero_name">Fu Lap Hang, Ivan</h1>
+        <p class="tagline" data-i18n="hero_tagline">Accounting &amp; Finance Graduate • University of Birmingham</p>
+        <p class="bio" data-i18n="hero_bio">
           Aspiring audit and assurance professional with a strong foundation in financial reporting, corporate governance, and data analytics. Experienced in executing ETL workflows, interpreting regulatory frameworks, and applying predictive analytical tools to drive decision-making in compliance and financial analysis.
         </p>
-        <div class="contact-links">
+        <div class="contact-links" id="contact">
           <span>📞 +852 5423 1106</span>
           <span>•</span>
           <a href="mailto:salou002728@gmail.com">✉️ salou002728@gmail.com</a>
@@ -42,8 +66,8 @@
           <a href="https://www.linkedin.com/in/lap-hang-fu-305888243" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
         </div>
         <div class="hero-cta">
-          <a href="#projects" class="btn-primary">View Portfolio Projects</a>
-          <a href="cv.pdf" class="btn-secondary" download>Get Resume PDF</a>
+          <a href="#projects" class="btn-primary" data-i18n="btn_view_projects">View Portfolio Projects</a>
+          <a href="cv.pdf" class="btn-secondary" download data-i18n="btn_get_pdf">Get Resume PDF</a>
         </div>
       </div>
     </div>
@@ -53,94 +77,84 @@
 
     <!-- EDUCATION SECTION -->
     <section class="section" id="education">
-      <h2 class="section-title">Education</h2>
+      <h2 class="section-title" data-i18n="sec_education">Education</h2>
       
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-header">
             <div>
               <h3>UNIVERSITY OF BIRMINGHAM</h3>
-              <div class="timeline-subtitle">B.Sc. Accounting and Finance (Class II, Division I)</div>
+              <div class="timeline-subtitle" data-i18n="edu_bham_deg">B.Sc. Accounting and Finance (Class II, Division I)</div>
               <div class="timeline-institution">Birmingham Business School</div>
             </div>
-            <span class="timeline-date">Sep 2024 &ndash; Jun 2026</span>
+            <span class="timeline-date">Sep 2024 – Jun 2026</span>
           </div>
-          <p class="timeline-meta"><strong>GPA:</strong> 3.5/4 &bull; Focused on Advanced Financial Reporting, Research Methodologies, and Corporate Governance.</p>
+          <p class="timeline-meta" data-i18n="edu_bham_meta"><strong>GPA:</strong> 3.5/4 • Focused on Advanced Financial Reporting, Research Methodologies, and Corporate Governance.</p>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-header">
             <div>
               <h3>SINGAPORE INSTITUTE OF MANAGEMENT</h3>
-              <div class="timeline-subtitle">Diploma in Management Studies</div>
+              <div class="timeline-subtitle" data-i18n="edu_sim_deg">Diploma in Management Studies</div>
             </div>
-            <span class="timeline-date">Oct 2022 &ndash; Dec 2023</span>
+            <span class="timeline-date">Oct 2022 – Dec 2023</span>
           </div>
-          <p class="timeline-meta"><strong>GPA:</strong> 3.233/4 &bull; Structured Business Foundations, Operations, and Management Frameworks.</p>
+          <p class="timeline-meta" data-i18n="edu_sim_meta"><strong>GPA:</strong> 3.233/4 • Structured Business Foundations, Operations, and Management Frameworks.</p>
         </div>
       </div>
     </section>
 
-    <!-- PROJECT EXPERIENCES -->
+    <!-- RESEARCH & PROJECTS -->
     <section class="section" id="projects">
-      <h2 class="section-title">Visual Research &amp; Analytics Projects</h2>
+      <h2 class="section-title" data-i18n="sec_projects">Visual Research &amp; Analytics Projects</h2>
 
       <!-- PROJECT 1 -->
       <div class="project-card">
         <div class="project-header">
           <div>
-            <span class="proj-badge primary">Regulatory Audit</span>
-            <h3>Singapore Exchange (SGX) Sustainability Assurance &amp; Green Finance Audit Analysis</h3>
+            <span class="proj-badge primary" data-i18n="p1_badge">Regulatory Audit</span>
+            <h3 data-i18n="p1_title">Singapore Exchange (SGX) Sustainability Assurance &amp; Green Finance Audit Analysis</h3>
           </div>
           <span class="date">June 2026</span>
         </div>
-        <p class="role">Independent Research Project &mdash; BSc Thesis</p>
+        <p class="role" data-i18n="p1_role">Independent Research Project — BSc Thesis</p>
         
         <div class="project-badges">
-          <span class="p-pill">SSAE 3000</span>
-          <span class="p-pill">ISAE 3000</span>
-          <span class="p-pill">ISO 14064-3</span>
-          <span class="p-pill">ESG Compliance</span>
-          <span class="p-pill">Information Asymmetry</span>
+          <span class="p-pill">SSAE 3000</span><span class="p-pill">ISAE 3000</span><span class="p-pill">ISO 14064-3</span><span class="p-pill">ESG Compliance</span><span class="p-pill">Information Asymmetry</span>
         </div>
 
-        <p class="project-summary">
+        <p class="project-summary" data-i18n="p1_summary">
           A critical evaluation of sustainability corporate disclosures in Singapore’s Real Estate Sector under Rules 711A and 711B, modeling Akerlof’s Market for Lemons theory to trace verification disparities across three baseline metrics: Internal Review (GuocoLand), Limited Assurance (UOL), and Reasonable Assurance (CDL).
         </p>
 
         <ul>
-          <li>Analysed and compared ESG audit methodologies across major SGX-listed developers, evaluating compliance with SGX-ST Listing Rules 711A and 711B under SSAE 3000 (Revised), ISAE 3000 (Revised), and ISO 14064-3 standards.</li>
-          <li>Evaluated verification depth and testing procedures, distinguishing between limited assurance protocols and reasonable assurance frameworks.</li>
-          <li>Assessed audit risk and scope limitations in green financing transactions, identifying compliance and reporting vulnerabilities caused by the exclusion of Scope 3 value-chain emissions and the structural reliance on negative-expression assurance conclusions.</li>
+          <li data-i18n="p1_l1">Analysed and compared ESG audit methodologies across major SGX-listed developers, evaluating compliance with SGX-ST Listing Rules 711A and 711B under SSAE 3000 (Revised), ISAE 3000 (Revised), and ISO 14064-3 standards.</li>
+          <li data-i18n="p1_l2">Evaluated verification depth and testing procedures, distinguishing between limited assurance protocols and reasonable assurance frameworks.</li>
+          <li data-i18n="p1_l3">Assessed audit risk and scope limitations in green financing transactions, identifying compliance and reporting vulnerabilities caused by the exclusion of Scope 3 value-chain emissions and the structural reliance on negative-expression assurance conclusions.</li>
         </ul>
       </div>
 
-      <!-- PROJECT 2: OPTIMIZED TABLEAU STORY EMBED -->
+      <!-- PROJECT 2: OPTIMIZED TABLEAU WITH ISOLATED RENDERING -->
       <div class="project-card">
         <div class="project-header">
           <div>
-            <span class="proj-badge secondary">Tableau &amp; Data Analysis</span>
-            <h3>Property Resale Data Analytics &amp; Visualization (Singapore HDB resales)</h3>
+            <span class="proj-badge secondary" data-i18n="p2_badge">Tableau &amp; Data Analysis</span>
+            <h3 data-i18n="p2_title">Property Resale Data Analytics &amp; Visualization (Singapore HDB resales)</h3>
           </div>
           <span class="date">Dec 2025</span>
         </div>
-        <p class="role">Business Analytics Portfolio Project</p>
+        <p class="role" data-i18n="p2_role">Business Analytics Portfolio Project</p>
 
         <div class="project-badges">
-          <span class="p-pill">Tableau Public</span>
-          <span class="p-pill">Advanced Excel</span>
-          <span class="p-pill">ETL</span>
-          <span class="p-pill">Schema Normalization</span>
-          <span class="p-pill">Interactive Dashboards</span>
+          <span class="p-pill">Tableau Public</span><span class="p-pill">Advanced Excel</span><span class="p-pill">ETL</span><span class="p-pill">Schema Normalization</span><span class="p-pill">Interactive Dashboards</span>
         </div>
 
-        <p class="project-summary">
+        <p class="project-summary" data-i18n="p2_summary">
           An interactive real-estate visual analytics modeling project targeted at helping first-time HDB homebuyers discover optimal property values using demographic, financial, and amenity datasets.
         </p>
 
-        <!-- MODERN TABLEAU EMBEDDING API V3 (FORCES INTRODUCTION TO LOAD FIRST) -->
         <div class="tableau-embed-container">
-          <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
           <tableau-viz 
             id="tableauViz"
             src="https://public.tableau.com/views/BusinessAnalyticsIndividualAssignment_17647984447360/Story"
@@ -153,17 +167,14 @@
             const viz = document.getElementById('tableauViz');
             viz.addEventListener('firstinteractive', async () => {
               try {
-                const workbook = viz.workbook;
-                const activeSheet = workbook.activeSheet;
-                // StoryPoint index 1 is the 1st story point (Introduction)
-                await activeSheet.activateStoryPointAsync(1);
+                const sheet = viz.workbook.activeSheet;
+                await sheet.activateStoryPointAsync(1);
               } catch (e) {
                 try {
-                  const workbook = viz.workbook;
-                  const activeSheet = workbook.activeSheet;
-                  await activeSheet.activateStoryPointAsync(0);
+                  const sheet = viz.workbook.activeSheet;
+                  await sheet.activateStoryPointAsync(0);
                 } catch (err) {
-                  console.error('Story point switch:', err);
+                  console.log('Story ready.');
                 }
               }
             });
@@ -171,13 +182,13 @@
         </div>
 
         <ul>
-          <li>Executed end-to-end ETL and data cleaning workflows in Excel and Tableau on a 220,000+ row public dataset, handling file-size constraints, eliminating target-irrelevant records, and validating data integrity.</li>
-          <li>Performed string manipulation and schema normalization using Excel functions [such as Flash Fill and UPPER()] to extract street-level location attributes and standardize primary keys across multi-source datasets.</li>
-          <li>Designed 7 chapters including 5 dashboards in Tableau (histograms, heatmaps, and scatter plots) to analyze price-per-square-meter efficiency, lease depreciation curves, and amenity density trade-offs.</li>
+          <li data-i18n="p2_l1">Executed end-to-end ETL and data cleaning workflows in Excel and Tableau on a 220,000+ row public dataset, handling file-size constraints, eliminating target-irrelevant records, and validating data integrity.</li>
+          <li data-i18n="p2_l2">Performed string manipulation and schema normalization using Excel functions [such as Flash Fill and UPPER()] to extract street-level location attributes and standardize primary keys across multi-source datasets.</li>
+          <li data-i18n="p2_l3">Designed 7 chapters including 5 dashboards in Tableau (histograms, heatmaps, and scatter plots) to analyze price-per-square-meter efficiency, lease depreciation curves, and amenity density trade-offs.</li>
         </ul>
         
         <div class="project-actions">
-          <a href="https://public.tableau.com/app/profile/ivan.fu2095/viz/BusinessAnalyticsIndividualAssignment_17647984447360/Story?publish=yes" target="_blank" rel="noopener noreferrer" class="btn-project-link">
+          <a href="https://public.tableau.com/app/profile/ivan.fu2095/viz/BusinessAnalyticsIndividualAssignment_17647984447360/Story?publish=yes" target="_blank" rel="noopener noreferrer" class="btn-project-link" data-i18n="p2_link">
             🌐 Open Story in Fullscreen on Tableau Public
           </a>
         </div>
@@ -187,50 +198,46 @@
       <div class="project-card">
         <div class="project-header">
           <div>
-            <span class="proj-badge tertiary">Financial Reporting</span>
-            <h3>Darktrace Ltd (AI Cybersecurity Firm) Financial Report &amp; Asset Analysis</h3>
+            <span class="proj-badge tertiary" data-i18n="p3_badge">Financial Reporting</span>
+            <h3 data-i18n="p3_title">Darktrace Ltd (AI Cybersecurity Firm) Financial Report &amp; Asset Analysis</h3>
           </div>
           <span class="date">April 2024</span>
         </div>
-        <p class="role">IFRS Compliance Project</p>
+        <p class="role" data-i18n="p3_role">IFRS Compliance Project</p>
 
         <div class="project-badges">
-          <span class="p-pill">IFRS Compliance</span>
-          <span class="p-pill">IAS 16 (PPE)</span>
-          <span class="p-pill">IAS 38 (Intangibles)</span>
-          <span class="p-pill">IAS 36 (Impairment)</span>
-          <span class="p-pill">Acquisition Accounting</span>
+          <span class="p-pill">IFRS Compliance</span><span class="p-pill">IAS 16 (PPE)</span><span class="p-pill">IAS 38 (Intangibles)</span><span class="p-pill">IAS 36 (Impairment)</span><span class="p-pill">Acquisition Accounting</span>
         </div>
 
-        <p class="project-summary">
+        <p class="project-summary" data-i18n="p3_summary">
           Disclosed and analyzed the year-over-year asset shifts for a leading UK cybersecurity firm (pre-acquisition), examining strict IFRS application over goodwill, development capitalization, and depreciation behaviors.
         </p>
 
         <ul>
-          <li>Performed a detailed financial analysis of non-current assets under IFRS, including PPE and intangible assets, ensuring compliance with IAS 16, 38, and 36, and identifying discrepancies between reported and calculated depreciation and amortization.</li>
-          <li>Evaluated impairment risk for goodwill and intangible assets by analyzing fair value less costs to disposal (FVLCD), market capitalization trends, and business indicators, confirming a $4.8B headroom and no impairment loss required under IAS 36.</li>
-          <li>Analysed financial statements and notes to assess accounting policies, asset valuations, and strategic business shifts (e.g., transition to cloud-based solutions), enhancing understanding of how operational changes impact financial reporting and asset management.</li>
+          <li data-i18n="p3_l1">Performed a detailed financial analysis of non-current assets under IFRS, including PPE and intangible assets, ensuring compliance with IAS 16, 38, and 36, and identifying discrepancies between reported and calculated depreciation and amortization.</li>
+          <li data-i18n="p3_l2">Evaluated impairment risk for goodwill and intangible assets by analyzing fair value less costs to disposal (FVLCD), market capitalization trends, and business indicators, confirming a $4.8B headroom and no impairment loss required under IAS 36.</li>
+          <li data-i18n="p3_l3">Analysed financial statements and notes to assess accounting policies, asset valuations, and strategic business shifts (e.g., transition to cloud-based solutions), enhancing understanding of how operational changes impact financial reporting and asset management.</li>
         </ul>
       </div>
     </section>
 
     <!-- WORK EXPERIENCE -->
     <section class="section" id="experience">
-      <h2 class="section-title">Work Experience</h2>
+      <h2 class="section-title" data-i18n="sec_experience">Work Experience</h2>
 
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-header">
             <div>
               <h3>DESCENTE LTD</h3>
-              <div class="timeline-subtitle">Part-time Sales</div>
+              <div class="timeline-subtitle" data-i18n="exp_role">Part-time Sales</div>
             </div>
-            <span class="timeline-date">Jan 2024 &ndash; May 2024</span>
+            <span class="timeline-date">Jan 2024 – May 2024</span>
           </div>
           <ul>
-            <li>Supported daily sales operations, gaining exposure to point-of sale (POS) systems and basic transaction handling.</li>
-            <li>Developed attention to detail through inventory tracking and cash handling responsibilities.</li>
-            <li>Strengthened customer relationship skills, a key component in client-facing roles.</li>
+            <li data-i18n="exp_l1">Supported daily sales operations, gaining exposure to point-of sale (POS) systems and basic transaction handling.</li>
+            <li data-i18n="exp_l2">Developed attention to detail through inventory tracking and cash handling responsibilities.</li>
+            <li data-i18n="exp_l3">Strengthened customer relationship skills, a key component in client-facing roles.</li>
           </ul>
         </div>
       </div>
@@ -238,36 +245,36 @@
 
     <!-- SKILLS SECTION -->
     <section class="section" id="skills">
-      <h2 class="section-title">Core Skills &amp; Competencies</h2>
+      <h2 class="section-title" data-i18n="sec_skills">Core Skills &amp; Competencies</h2>
       
       <div class="skills-grid-portfolio">
         <div class="skill-group-card">
-          <h4>Technical Skills</h4>
+          <h4 data-i18n="skill_g1_title">Technical Skills</h4>
           <ul>
-            <li>Advanced Excel &bull; Flash Fill, UPPER, Complex Formulas</li>
-            <li>Tableau &amp; Tableau Public &bull; ETL, Visual Dashboards</li>
-            <li>Microsoft Office Suite (Word, PowerPoint)</li>
-            <li>Qualitative Case Analysis &amp; Purposive Sampling</li>
+            <li data-i18n="skill_g1_1">Advanced Excel • Flash Fill, UPPER, Complex Formulas</li>
+            <li data-i18n="skill_g1_2">Tableau &amp; Tableau Public • ETL, Visual Dashboards</li>
+            <li data-i18n="skill_g1_3">Microsoft Office Suite (Word, PowerPoint)</li>
+            <li data-i18n="skill_g1_4">Qualitative Case Analysis &amp; Purposive Sampling</li>
           </ul>
         </div>
 
         <div class="skill-group-card">
-          <h4>Frameworks &amp; Compliance</h4>
+          <h4 data-i18n="skill_g2_title">Frameworks &amp; Compliance</h4>
           <ul>
-            <li>IFRS &amp; IAS Standards &bull; IAS 16, IAS 38, IAS 36</li>
-            <li>Sustainability Assurance &bull; SSAE 3000, ISAE 3000</li>
-            <li>Environmental Verification &bull; ISO 14064-3 standards</li>
-            <li>Regulatory Reporting &bull; SGX-ST rules 711A and 711B</li>
+            <li>IFRS &amp; IAS Standards • IAS 16, IAS 38, IAS 36</li>
+            <li>Sustainability Assurance • SSAE 3000, ISAE 3000</li>
+            <li>Environmental Verification • ISO 14064-3 standards</li>
+            <li>Regulatory Reporting • SGX-ST rules 711A and 711B</li>
           </ul>
         </div>
 
         <div class="skill-group-card">
-          <h4>Soft Skills &amp; Profile</h4>
+          <h4 data-i18n="skill_g3_title">Soft Skills &amp; Profile</h4>
           <ul>
-            <li>Languages: Cantonese (Native), Mandarin (Native), English (Fluent)</li>
-            <li>Certification: IELTS Academic Band 6.5 (Jun 2022)</li>
-            <li>Detail-Oriented &bull; Cash/Inventory audit, client handling</li>
-            <li>Interests &bull; Billiards, Cycling</li>
+            <li data-i18n="skill_g3_1">Languages: Cantonese (Native), Mandarin (Native), English (Fluent)</li>
+            <li data-i18n="skill_g3_2">Certification: IELTS Academic Band 6.5 (Jun 2022)</li>
+            <li data-i18n="skill_g3_3">Detail-Oriented • Cash/Inventory audit, client handling</li>
+            <li data-i18n="skill_g3_4">Interests • Billiards, Cycling</li>
           </ul>
         </div>
       </div>
@@ -275,12 +282,209 @@
 
   </main>
 
+  <!-- Sticky Bottom Navigation Banner -->
+  <nav class="bottom-banner" aria-label="Quick Navigation">
+    <a href="#home">
+      <span class="icon">🏠</span>
+      <span data-i18n="bot_home">Home</span>
+    </a>
+    <a href="#projects">
+      <span class="icon">📊</span>
+      <span data-i18n="bot_research">Research</span>
+    </a>
+    <a href="cv.pdf" download>
+      <span class="icon">📄</span>
+      <span data-i18n="bot_cv">CV</span>
+    </a>
+    <a href="#contact">
+      <span class="icon">✉️</span>
+      <span data-i18n="bot_contact">Contact</span>
+    </a>
+  </nav>
+
   <footer>
     <div class="footer-content">
-      <p>&copy; 2026 Fu Lap Hang (Ivan) &bull; Portfolio Website</p>
-      <p>Designed with Semantic HTML &amp; CSS. Hosted on GitHub Pages.</p>
+      <p>&copy; 2026 Fu Lap Hang (Ivan) • Portfolio Website</p>
+      <p data-i18n="footer_sub">Designed with Semantic HTML, CSS &amp; JS. Hosted on GitHub Pages.</p>
     </div>
   </footer>
+
+  <!-- Instant Non-Blocking Script Execution -->
+  <script>
+    const translations = {
+      en: {
+        nav_about: "About",
+        nav_education: "Education",
+        nav_projects: "Projects",
+        nav_experience: "Experience",
+        nav_skills: "Skills",
+        btn_cv: "Download CV",
+        hero_badge: "Audit & Data Analytics",
+        hero_name: "Fu Lap Hang, Ivan",
+        hero_tagline: "Accounting & Finance Graduate • University of Birmingham",
+        hero_bio: "Aspiring audit and assurance professional with a strong foundation in financial reporting, corporate governance, and data analytics. Experienced in executing ETL workflows, interpreting regulatory frameworks, and applying predictive analytical tools to drive decision-making in compliance and financial analysis.",
+        btn_view_projects: "View Portfolio Projects",
+        btn_get_pdf: "Get Resume PDF",
+        sec_education: "Education",
+        edu_bham_deg: "B.Sc. Accounting and Finance (Class II, Division I)",
+        edu_bham_meta: "<strong>GPA:</strong> 3.5/4 • Focused on Advanced Financial Reporting, Research Methodologies, and Corporate Governance.",
+        edu_sim_deg: "Diploma in Management Studies",
+        edu_sim_meta: "<strong>GPA:</strong> 3.233/4 • Structured Business Foundations, Operations, and Management Frameworks.",
+        sec_projects: "Visual Research & Analytics Projects",
+        p1_badge: "Regulatory Audit",
+        p1_title: "Singapore Exchange (SGX) Sustainability Assurance & Green Finance Audit Analysis",
+        p1_role: "Independent Research Project — BSc Thesis",
+        p1_summary: "A critical evaluation of sustainability corporate disclosures in Singapore’s Real Estate Sector under Rules 711A and 711B, modeling Akerlof’s Market for Lemons theory to trace verification disparities across three baseline metrics: Internal Review (GuocoLand), Limited Assurance (UOL), and Reasonable Assurance (CDL).",
+        p1_l1: "Analysed and compared ESG audit methodologies across major SGX-listed developers, evaluating compliance with SGX-ST Listing Rules 711A and 711B under SSAE 3000 (Revised), ISAE 3000 (Revised), and ISO 14064-3 standards.",
+        p1_l2: "Evaluated verification depth and testing procedures, distinguishing between limited assurance protocols and reasonable assurance frameworks.",
+        p1_l3: "Assessed audit risk and scope limitations in green financing transactions, identifying compliance and reporting vulnerabilities caused by the exclusion of Scope 3 value-chain emissions and the structural reliance on negative-expression assurance conclusions.",
+        p2_badge: "Tableau & Data Analysis",
+        p2_title: "Property Resale Data Analytics & Visualization (Singapore HDB resales)",
+        p2_role: "Business Analytics Portfolio Project",
+        p2_summary: "An interactive real-estate visual analytics modeling project targeted at helping first-time HDB homebuyers discover optimal property values using demographic, financial, and amenity datasets.",
+        p2_l1: "Executed end-to-end ETL and data cleaning workflows in Excel and Tableau on a 220,000+ row public dataset, handling file-size constraints, eliminating target-irrelevant records, and validating data integrity.",
+        p2_l2: "Performed string manipulation and schema normalization using Excel functions [such as Flash Fill and UPPER()] to extract street-level location attributes and standardize primary keys across multi-source datasets.",
+        p2_l3: "Designed 7 chapters including 5 dashboards in Tableau (histograms, heatmaps, and scatter plots) to analyze price-per-square-meter efficiency, lease depreciation curves, and amenity density trade-offs.",
+        p2_link: "🌐 Open Story in Fullscreen on Tableau Public",
+        p3_badge: "Financial Reporting",
+        p3_title: "Darktrace Ltd (AI Cybersecurity Firm) Financial Report & Asset Analysis",
+        p3_role: "IFRS Compliance Project",
+        p3_summary: "Disclosed and analyzed the year-over-year asset shifts for a leading UK cybersecurity firm (pre-acquisition), examining strict IFRS application over goodwill, development capitalization, and depreciation behaviors.",
+        p3_l1: "Performed a detailed financial analysis of non-current assets under IFRS, including PPE and intangible assets, ensuring compliance with IAS 16, 38, and 36, and identifying discrepancies between reported and calculated depreciation and amortization.",
+        p3_l2: "Evaluated impairment risk for goodwill and intangible assets by analyzing fair value less costs to disposal (FVLCD), market capitalization trends, and business indicators, confirming a $4.8B headroom and no impairment loss required under IAS 36.",
+        p3_l3: "Analysed financial statements and notes to assess accounting policies, asset valuations, and strategic business shifts (e.g., transition to cloud-based solutions), enhancing understanding of how operational changes impact financial reporting and asset management.",
+        sec_experience: "Work Experience",
+        exp_role: "Part-time Sales",
+        exp_l1: "Supported daily sales operations, gaining exposure to point-of sale (POS) systems and basic transaction handling.",
+        exp_l2: "Developed attention to detail through inventory tracking and cash handling responsibilities.",
+        exp_l3: "Strengthened customer relationship skills, a key component in client-facing roles.",
+        sec_skills: "Core Skills & Competencies",
+        skill_g1_title: "Technical Skills",
+        skill_g1_1: "Advanced Excel • Flash Fill, UPPER, Complex Formulas",
+        skill_g1_2: "Tableau & Tableau Public • ETL, Visual Dashboards",
+        skill_g1_3: "Microsoft Office Suite (Word, PowerPoint)",
+        skill_g1_4: "Qualitative Case Analysis & Purposive Sampling",
+        skill_g2_title: "Frameworks & Compliance",
+        skill_g3_title: "Soft Skills & Profile",
+        skill_g3_1: "Languages: Cantonese (Native), Mandarin (Native), English (Fluent)",
+        skill_g3_2: "Certification: IELTS Academic Band 6.5 (Jun 2022)",
+        skill_g3_3: "Detail-Oriented • Cash/Inventory audit, client handling",
+        skill_g3_4: "Interests • Billiards, Cycling",
+        bot_home: "Home",
+        bot_research: "Research",
+        bot_cv: "CV",
+        bot_contact: "Contact",
+        footer_sub: "Designed with Semantic HTML, CSS & JS. Hosted on GitHub Pages."
+      },
+      zh: {
+        nav_about: "關於我",
+        nav_education: "學歷背景",
+        nav_projects: "專案研究",
+        nav_experience: "工作經歷",
+        nav_skills: "專業技能",
+        btn_cv: "下載履歷 (CV)",
+        hero_badge: "審計與數據分析",
+        hero_name: "符立恆 (Ivan)",
+        hero_tagline: "會計與金融學士 • 英國伯明翰大學",
+        hero_bio: "致力於審計與鑒證專業，具備扎實的財務報告、企業管治與數據分析基礎。熟練應用 ETL 數據清洗流程、解讀監管法規框架，並利用可視化及預測工具輔助合規性與財務分析決策。",
+        btn_view_projects: "瀏覽專案作品",
+        btn_get_pdf: "獲取履歷 PDF",
+        sec_education: "學歷背景",
+        edu_bham_deg: "會計與金融理學士（二級甲等榮譽）",
+        edu_bham_meta: "<strong>GPA:</strong> 3.5/4 • 專注於高級財務報告、實證研究方法及企業管治架構。",
+        edu_sim_deg: "管理學文憑",
+        edu_sim_meta: "<strong>GPA:</strong> 3.233/4 • 系統化商業營運、組織管理與商業模型基礎。",
+        sec_projects: "視覺化研究與數據分析專案",
+        p1_badge: "合規審計",
+        p1_title: "新加坡交易所 (SGX) 永續鑒證與綠色金融審計深度分析",
+        p1_role: "獨立研究專案 — 學士畢業論文",
+        p1_summary: "深入評估新加坡房地產行業在 SGX 規則 711A 及 711B 下的企業披露情況，應用阿克洛夫「檸檬市場」理論剖析三家標杆企業（國浩地產內部審核、華業集團有限保證、城市發展合理保證）之驗證落差。",
+        p1_l1: "對比主流 SGX 上市房企的 ESG 審計流程，評估其在 SSAE 3000、ISAE 3000 及 ISO 14064-3 下之合規度。",
+        p1_l2: "深入評估實質性測試與控制測試程序，精確解析「有限保證」與「合理保證」間的驗證深度差異。",
+        p1_l3: "識別綠色融資中排除範圍三 (Scope 3) 價值鏈碳排及依賴消極語句鑒證意見所引致之合規風險。",
+        p2_badge: "Tableau 與數據分析",
+        p2_title: "新加坡組屋 (HDB) 轉售市場數據分析與動態可視化",
+        p2_role: "商業分析作品集專案",
+        p2_summary: "針對首次置業買家建構之房地產分析模型，結合人口統計、財務預算與周邊配套數據，發掘具備最優性價比之房源分佈。",
+        p2_l1: "於 Excel 及 Tableau 中執行涵蓋逾 22 萬筆公開交易資料之端到端 ETL 清洗流程，排除無效數據並完成資料一致性校驗。",
+        p2_l2: "利用 Excel 進行字串處理與架構正規化，提取街道層級空間特徵並標準化多源數據集之 Primary Key。",
+        p2_l3: "於 Tableau 構建 7 個章節及 5 套互動儀表板（含直方圖、熱力圖及散點圖），深入量化分析每平方米單價效益、屋契折舊率與設施密度平衡。",
+        p2_link: "🌐 在 Tableau Public 上全螢幕開啟 Story",
+        p3_badge: "財務報告",
+        p3_title: "Darktrace Ltd（AI 網絡安全企業）財務報告與資產結構分析",
+        p3_role: "IFRS 國際會計準則合規專案",
+        p3_summary: "剖析英國領先網絡安全企業在併購前之年度資產變化，檢驗國際財務報告準則（IFRS）在商譽、開發支出資本化及折舊行為上之嚴格落實。",
+        p3_l1: "依據 IAS 16、38 及 36 深度檢視固定資產與無形資產，識別實際計提折舊攤銷與模型預測之微小差異。",
+        p3_l2: "根據可收回金額（FVLCD）與市值表現評估商譽減值風險，核實存在 48 億美元安全邊際，無須提撥減值損失。",
+        p3_l3: "解讀報表附註以評估會計政策在業務向雲端轉型時的財務對應，加深對營運調整如何映射至財務指標的理解。",
+        sec_experience: "工作經歷",
+        exp_role: "兼職銷售員",
+        exp_l1: "協助店舖日常零售運作，熟練操作 POS 收銀系統及基礎交易結算手續。",
+        exp_l2: "執行庫存盤點與現金交收作業，培養高度細緻與準確的審計核對習慣。",
+        exp_l3: "強化第一線溝通與客情維護技巧，鞏固面對外部客戶時之溝通應變能力。",
+        sec_skills: "核心技能與專業素養",
+        skill_g1_title: "技術技能",
+        skill_g1_1: "高級 Excel • 快速填入、UPPER、複雜巢狀函數",
+        skill_g1_2: "Tableau & Tableau Public • ETL、動態交互式看板",
+        skill_g1_3: "Microsoft Office 全套文書應用 (Word, PowerPoint)",
+        skill_g1_4: "質性案例分析與立意抽樣 (Purposive Sampling)",
+        skill_g2_title: "法規與準則框架",
+        skill_g3_title: "語言與個人素養",
+        skill_g3_1: "語言能力：廣東話（母語）、普通話（母語）、英語（流利）",
+        skill_g3_2: "語言認證：雅思 (IELTS) 學術類 6.5 分",
+        skill_g3_3: "審慎細緻 • 現金/庫存核對、客戶溝通對接",
+        skill_g3_4: "個人興趣 • 英式桌球/撞球、單車騎行",
+        bot_home: "首頁",
+        bot_research: "研究作品",
+        bot_cv: "履歷",
+        bot_contact: "聯絡方式",
+        footer_sub: "採用語義化 HTML、CSS 及 JS 開發。託管於 GitHub Pages。"
+      }
+    };
+
+    // Fast, lightweight DOM updates
+    let currentLang = localStorage.getItem('site_lang') || 'en';
+    const langToggleBtn = document.getElementById('langToggle');
+    const langLabel = document.getElementById('langLabel');
+
+    function applyLanguage(lang) {
+      const elements = document.querySelectorAll('[data-i18n]');
+      for (let i = 0; i < elements.length; i++) {
+        const key = elements[i].getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          elements[i].innerHTML = translations[lang][key];
+        }
+      }
+      langLabel.textContent = lang === 'en' ? '繁中' : 'EN';
+      localStorage.setItem('site_lang', lang);
+      currentLang = lang;
+    }
+
+    langToggleBtn.addEventListener('click', () => {
+      applyLanguage(currentLang === 'en' ? 'zh' : 'en');
+    });
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    let currentTheme = localStorage.getItem('site_theme') || 'light';
+
+    function updateThemeUI(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
+      localStorage.setItem('site_theme', theme);
+      currentTheme = theme;
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      updateThemeUI(currentTheme === 'light' ? 'dark' : 'light');
+    });
+
+    // Run setup immediately on load
+    updateThemeUI(currentTheme);
+    applyLanguage(currentLang);
+  </script>
 
 </body>
 </html>
