@@ -138,45 +138,43 @@
           An interactive real-estate visual analytics modeling project targeted at helping first-time HDB homebuyers discover optimal property values using demographic, financial, and amenity datasets.
         </p>
 
-        <!-- ASYNCHRONOUS HIGH-SPEED TABLEAU CONTAINER -->
-        <!-- PROGRAMMATIC TABLEAU EMBED: FORCES FIRST STORY POINT (INTRODUCTION) -->
+        <!-- PROGRAMMATIC TABLEAU EMBED: FORCES INTRODUCTION TAB FIRST -->
         <div class="tableau-embed-container">
           <div id="tableauVizContainer" style="width: 100%; height: 850px;"></div>
           <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
           <script type="text/javascript">
-            window.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function () {
               var containerDiv = document.getElementById("tableauVizContainer");
               var url = "https://public.tableau.com/views/BusinessAnalyticsIndividualAssignment_17647984447360/Story";
+              
               var options = {
-                hideTabs: true,
+                hideTabs: false,
                 hideToolbar: false,
                 width: "100%",
                 height: "850px",
-                onFirstInteractive: function (viz) {
-                  // Access the storybook and force it to switch to index 0 (Introduction)
-                  try {
-                    var sheet = viz.getWorkbook().getActiveSheet();
-                    if (sheet.getSheetType() === 'story') {
-                      sheet.activateStoryPointAsync(0);
+                onFirstInteractive: function (vizInstance) {
+                  function switchToIntro() {
+                    try {
+                      var sheet = vizInstance.getWorkbook().getActiveSheet();
+                      if (sheet.getSheetType() === 'story') {
+                        // Switch immediately to index 0 (Introduction)
+                        sheet.activateStoryPointAsync(0).then(function() {
+                          console.log("Switched to Introduction successfully.");
+                        }).catch(function(err) {
+                          console.error("Navigation error:", err);
+                        });
+                      }
+                    } catch (e) {
+                      console.log("Retrying navigation...", e);
+                      setTimeout(switchToIntro, 300);
                     }
-                  } catch (err) {
-                    console.log("Story navigation initialized:", err);
                   }
+                  // Slight delay ensures the Story container has finished internal registration
+                  setTimeout(switchToIntro, 200);
                 }
               };
+              
               var viz = new tableau.Viz(containerDiv, url, options);
-            });
-          </script>
-        </div>
-          <script type="text/javascript" defer>
-            window.addEventListener('DOMContentLoaded', function () {
-              var divElement = document.getElementById('viz1728835000000');
-              var vizElement = divElement.getElementsByTagName('object')[0];
-              vizElement.style.width = '100%';
-              vizElement.style.height = '850px';
-              var scriptElement = document.createElement('script');
-              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              vizElement.parentNode.insertBefore(scriptElement, vizElement);
             });
           </script>
         </div>
