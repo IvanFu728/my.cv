@@ -12,8 +12,8 @@
   --badge-text: #1d4ed8;
   --tag-bg: #f1f5f9;
   --tag-text: #334155;
-  --nav-bg: rgba(255, 255, 255, 0.88);
-  --bottom-bar-bg: rgba(255, 255, 255, 0.92);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --bottom-bar-bg: rgba(255, 255, 255, 0.95);
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -31,12 +31,11 @@
   --badge-text: #93c5fd;
   --tag-bg: #1e293b;
   --tag-text: #cbd5e1;
-  --nav-bg: rgba(17, 24, 39, 0.88);
-  --bottom-bar-bg: rgba(17, 24, 39, 0.92);
+  --nav-bg: rgba(17, 24, 39, 0.9);
+  --bottom-bar-bg: rgba(17, 24, 39, 0.95);
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
-/* Reset without global transitions to protect CPU performance */
 * {
   margin: 0;
   padding: 0;
@@ -54,8 +53,6 @@ body {
   line-height: 1.6;
   padding-bottom: 75px;
   -webkit-font-smoothing: antialiased;
-  /* Smooth color shifting exclusively on body and cards */
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Navbar */
@@ -64,8 +61,8 @@ body {
   top: 0;
   z-index: 1000;
   background-color: var(--nav-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   padding: 0.85rem 1.5rem;
   display: flex;
@@ -90,14 +87,13 @@ body {
   color: var(--text-secondary);
   font-size: 0.92rem;
   font-weight: 500;
-  transition: color 0.15s ease;
 }
 
 .nav-links a:hover {
   color: var(--primary-accent);
 }
 
-/* Control Buttons */
+/* Control Buttons (Dark mode & Lang) */
 .controls-group {
   display: flex;
   align-items: center;
@@ -116,7 +112,6 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .control-btn:hover {
@@ -131,7 +126,6 @@ body {
   font-weight: 600 !important;
   text-decoration: none;
   font-size: 0.85rem;
-  transition: background-color 0.15s ease;
 }
 
 .btn-download:hover {
@@ -143,7 +137,6 @@ body {
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-surface);
   padding: 3rem 1.5rem;
-  transition: background-color 0.2s ease;
 }
 
 .hero-container {
@@ -210,7 +203,6 @@ body {
 .contact-links a {
   color: var(--text-secondary);
   text-decoration: none;
-  transition: color 0.15s ease;
 }
 
 .contact-links a:hover {
@@ -229,7 +221,6 @@ body {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease;
 }
 
 .btn-primary {
@@ -272,7 +263,6 @@ body {
   border-radius: 8px;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .project-header, .timeline-header {
@@ -362,8 +352,6 @@ ul li {
   overflow: hidden;
   border: 1px solid var(--border-color);
   background: #ffffff;
-  /* Containment prevents Tableau repaints from slowing down page scrolling */
-  contain: layout paint;
 }
 
 /* Skills */
@@ -385,7 +373,7 @@ ul li {
   color: var(--primary-accent);
 }
 
-/* Sticky Bottom Banner (Hardware-Accelerated) */
+/* Sticky Bottom Banner */
 .bottom-banner {
   position: fixed;
   bottom: 0;
@@ -400,7 +388,6 @@ ul li {
   justify-content: space-around;
   align-items: center;
   z-index: 1000;
-  transform: translateZ(0); /* Forces GPU layer */
 }
 
 .bottom-banner a {
@@ -412,7 +399,6 @@ ul li {
   font-size: 0.75rem;
   font-weight: 600;
   gap: 2px;
-  transition: color 0.15s ease;
 }
 
 .bottom-banner a .icon {
@@ -431,7 +417,6 @@ footer {
   border-top: 1px solid var(--border-color);
 }
 
-/* Mobile responsive */
 @media (max-width: 768px) {
   .hero-container {
     flex-direction: column;
